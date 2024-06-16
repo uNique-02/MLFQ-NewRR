@@ -88,7 +88,7 @@ public class MLFQ {
                     System.out.println("Thread was interrupted, failed to complete operation");
                 }
             }
-            currentTime=0;
+            currentTime-=1;
         }else{
             for (Process process : processes) {
                 queues.get(0).addProcess(process);
@@ -439,11 +439,16 @@ public class MLFQ {
             System.out.println("Processing: " + priorityProcess.getId() + " from Queue: " + queue.getPriority());
             
             int timeslice=0;
-            if(priorityProcess.getExecutionCount()>0) {
-                timeslice = queue.getAllotedTime();
+            if(queues.size()>1) {
+                if(priorityProcess.getExecutionCount()>0) {
+                    timeslice = queue.getAllotedTime();
+                }else{
+                    timeslice = Math.min(queue.getAllotedTime(), priorityProcess.getRemainingTime());
+                }
             }else{
-                timeslice = Math.min(queue.getAllotedTime(), priorityProcess.getRemainingTime());
+                timeslice = queue.getAllotedTime();
             }
+            
             System.out.println("Time Slice for Process " + priorityProcess.getId() + ": " + timeslice);
     
             for (int i = 0; priorityProcess.getExecutionCount() < timeslice; i++) {

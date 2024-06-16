@@ -250,6 +250,15 @@ public class Main {
 
 
 
+        clrBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.setRowCount(0);
+                boxPanel.removeAll();
+                boxPanel.revalidate();
+                boxPanel.repaint();
+            }
+        });
 
         /* ============================== Run ======================================================= */
 
