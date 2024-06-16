@@ -146,7 +146,7 @@ public class MLFQ {
 
         Color color = processColors.computeIfAbsent(id, k -> {
             Random random = new Random();
-            return new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            return new Color(180 + new Random().nextInt(76), 180 + new Random().nextInt(76), 180 + new Random().nextInt(76));
         });
 
         JPanel box = new JPanel();
